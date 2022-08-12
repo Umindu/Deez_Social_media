@@ -3,7 +3,10 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
+import 'package:m_finder/screens/LandingPage/landingPage.dart';
+import 'package:m_finder/screens/Profile/ProfileHelpers.dart';
 import 'package:m_finder/services/Authentication.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
@@ -27,7 +30,10 @@ class Profile extends StatelessWidget {
           IconButton(
               icon: Icon(EvaIcons.logOutOutline),
               color: constantcolors.darkColor,
-              onPressed: () {})
+              onPressed: () {
+                Provider.of<ProfileHelper>(context, listen: false)
+                    .logOutDialog(context);
+              })
         ],
         backgroundColor: constantcolors.blueColor,
         title: RichText(
@@ -70,8 +76,17 @@ class Profile extends StatelessWidget {
                       child: CircularProgressIndicator(),
                     );
                   } else {
-                    return new Column(
-                      children: const [],
+                    return Column(
+                      children: [
+                        Provider.of<ProfileHelper>(context, listen: false)
+                            .headerProfile(context, snapshot),
+                        Provider.of<ProfileHelper>(context, listen: false)
+                            .divider(),
+                        Provider.of<ProfileHelper>(context, listen: false)
+                            .middleProfile(context, snapshot),
+                        Provider.of<ProfileHelper>(context, listen: false)
+                            .footerProfile(context, snapshot),
+                      ],
                     );
                   }
                 }),

@@ -1,13 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
+import 'package:m_finder/screens/Feed/Feed_helpers.dart';
 import 'package:m_finder/screens/Homepage/HomepageHepers.dart';
 import 'package:m_finder/screens/LandingPage/landingHelpers.dart';
 import 'package:m_finder/screens/LandingPage/landingServices.dart';
 import 'package:m_finder/screens/LandingPage/landingUtils.dart';
+import 'package:m_finder/screens/Profile/ProfileHelpers.dart';
 import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:m_finder/services/FirebaseOperation.dart';
+import 'package:m_finder/utils/UploadPost.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
     Constantcolors constantcolors = Constantcolors();
     return MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (_) => FeedHelpers()),
+          ChangeNotifierProvider(create: (_) => UploadPost()),
+          ChangeNotifierProvider(create: (_) => ProfileHelper()),
           ChangeNotifierProvider(create: (_) => HomepageHelpers()),
           ChangeNotifierProvider(create: (_) => LandingUtils()),
           ChangeNotifierProvider(create: (_) => FirebaseOperation()),

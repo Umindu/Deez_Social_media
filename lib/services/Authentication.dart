@@ -19,7 +19,7 @@ class Authentication with ChangeNotifier {
 
     User? user = userCredential.user;
     userUid = user!.uid;
-    print(userUid);
+    print(' User Uid = $userUid');
     notifyListeners();
   }
 
