@@ -22,17 +22,22 @@ class ProfileHelper with ChangeNotifier {
             height: 330.00,
             width: 180.00,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
-                    onTap: () {},
-                    child: CircleAvatar(
-                      backgroundColor: constantcolors.transparent,
-                      radius: 60.0,
-                      backgroundImage:
-                          NetworkImage(snapshot.data.data()['userimage']),
-                    )),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
+                  padding: const EdgeInsets.only(top: 1.00),
+                  child: GestureDetector(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        backgroundColor: constantcolors.transparent,
+                        radius: 60.0,
+                        backgroundImage:
+                            NetworkImage(snapshot.data.data()['userimage']),
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
                   child: Text(
                     snapshot.data.data()['username'],
                     style: TextStyle(
@@ -43,7 +48,7 @@ class ProfileHelper with ChangeNotifier {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 5.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -219,7 +224,7 @@ class ProfileHelper with ChangeNotifier {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.53,
+        height: MediaQuery.of(context).size.height * 0.44,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: constantcolors.blueColor,

@@ -47,6 +47,7 @@ dependencies:
   shared_preferences: 
   custom_navigation_bar: ^0.8.2
   get: ^4.6.5
+  lottie: ^1.4.1
   
 
 dev_dependencies:
