@@ -74,4 +74,34 @@ class FirebaseOperation with ChangeNotifier {
   Future uploadPostData(String postId, dynamic data) async {
     return FirebaseFirestore.instance.collection('post').doc(postId).set(data);
   }
+
+  Future deleteUserData(String postId, dynamic collection) async {
+    return FirebaseFirestore.instance
+        .collection(collection)
+        .doc(postId)
+        .delete();
+  }
+
+  Future followUser(
+      String followingUid,
+      String followingfDocId,
+      dynamic followingData,
+      String followerUid,
+      String followerDocId,
+      dynamic followerData) async {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(followingUid)
+        .collection('followers')
+        .doc(followingfDocId)
+        .set(followingData)
+        .whenComplete(() async {
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(followerUid)
+          .collection('following')
+          .doc(followerDocId)
+          .set(followerData);
+    });
+  }
 }

@@ -34,17 +34,17 @@ class _HomepageState extends State<Homepage> {
         backgroundColor: constantcolors.blueColor,
         body: PageView(
           controller: homePageController,
-          children: [
-            Feed(),
-            Chatroom(),
-            Profile(),
-          ],
           physics: NeverScrollableScrollPhysics(),
           onPageChanged: (page) {
             setState(() {
               pageIndex = page;
             });
           },
+          children: [
+            Feed(),
+            Chatroom(),
+            Profile(),
+          ],
         ),
         bottomNavigationBar:
             Provider.of<HomepageHelpers>(context, listen: false)

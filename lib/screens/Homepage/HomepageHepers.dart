@@ -21,7 +21,7 @@ class HomepageHelpers with ChangeNotifier {
         unSelectedColor: constantcolors.whiteColor,
         strokeColor: constantcolors.blueColor,
         scaleFactor: 0.5,
-        iconSize: 30.0,
+        iconSize: 25.0,
         onTap: (val) {
           index = val;
           pageController.jumpToPage(val);
@@ -29,14 +29,15 @@ class HomepageHelpers with ChangeNotifier {
         },
         backgroundColor: Color(0xff040307),
         items: [
-          CustomNavigationBarItem(icon: Icon(EvaIcons.home)),
-          CustomNavigationBarItem(icon: Icon(EvaIcons.messageCircle)),
+          CustomNavigationBarItem(icon: Icon(EvaIcons.homeOutline)),
+          CustomNavigationBarItem(icon: Icon(EvaIcons.messageSquareOutline)),
           CustomNavigationBarItem(
               icon: CircleAvatar(
-            radius: 35.0,
-            backgroundColor: constantcolors.blueGreyColor,
-            // backgroundImage: NetworkImage(Provider.of<FirebaseOperation>(context, listen: false).)
-          )),
+                  radius: 35.0,
+                  backgroundColor: constantcolors.blueGreyColor,
+                  backgroundImage: NetworkImage(
+                      Provider.of<FirebaseOperation>(context, listen: false)
+                          .initUserImage))),
         ]);
   }
 }
