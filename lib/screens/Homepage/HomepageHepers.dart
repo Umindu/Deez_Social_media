@@ -33,11 +33,9 @@ class HomepageHelpers with ChangeNotifier {
           CustomNavigationBarItem(icon: Icon(EvaIcons.messageSquareOutline)),
           CustomNavigationBarItem(
               icon: CircleAvatar(
-                  radius: 35.0,
-                  backgroundColor: constantcolors.blueGreyColor,
-                  backgroundImage: NetworkImage(
-                      Provider.of<FirebaseOperation>(context, listen: false)
-                          .initUserImage))),
+            radius: 35.0,
+            backgroundColor: constantcolors.blueGreyColor,
+          )),
         ]);
   }
 }

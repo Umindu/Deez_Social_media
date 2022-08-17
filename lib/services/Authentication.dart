@@ -37,31 +37,4 @@ class Authentication with ChangeNotifier {
   Future logOutViaEmail() {
     return firebaseAuth.signOut();
   }
-
-  //Google.............................................................................................................
-  Future signInWithGoogle() async {
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount!.authentication;
-    final AuthCredential authCredential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken);
-
-    final UserCredential userCredential =
-        await firebaseAuth.signInWithCredential(authCredential);
-
-    final User? user = userCredential.user;
-    assert(user!.uid != null);
-
-    userUid = user!.uid;
-    print(' User Uid = $userUid');
-    notifyListeners();
-  }
-
-  //google signout.....................................................................................
-
-  Future signOutWithGoogle() async {
-    return googleSignIn.signOut();
-  }
 }

@@ -80,44 +80,6 @@ class landingHelpers with ChangeNotifier {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  print('Signin With Google');
-                  Provider.of<Authentication>(context, listen: false)
-                      .signInWithGoogle()
-                      .whenComplete(() {
-                    Navigator.pushReplacement(
-                        context,
-                        PageTransition(
-                            child: Homepage(),
-                            type: PageTransitionType.bottomToTop));
-                  });
-                },
-                child: Container(
-                  height: 40.00,
-                  width: 80.00,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: constantcolors.redColor),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Icon(
-                    EvaIcons.google,
-                    color: constantcolors.redColor,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                child: Container(
-                  height: 40.00,
-                  width: 80.00,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: constantcolors.blueColor),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Icon(
-                    EvaIcons.facebook,
-                    color: constantcolors.blueColor,
-                  ),
-                ),
-              ),
             ],
           ),
         ));
