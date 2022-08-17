@@ -179,7 +179,9 @@ class UploadPost with ChangeNotifier {
         });
   }
 
-  editPostSheet(BuildContext context) {
+  editPostSheet(
+    BuildContext context,
+  ) {
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -269,6 +271,14 @@ class UploadPost with ChangeNotifier {
                   ),
                 ),
                 MaterialButton(
+                  color: constantcolors.blueColor,
+                  child: Text(
+                    'Share',
+                    style: TextStyle(
+                        color: constantcolors.whiteColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
+                  ),
                   onPressed: () async {
                     Provider.of<FirebaseOperation>(context, listen: false)
                         .uploadPostData(captioncontroller.text, {
@@ -287,18 +297,34 @@ class UploadPost with ChangeNotifier {
                       'useremail':
                           Provider.of<FirebaseOperation>(context, listen: false)
                               .initUserEmail,
-                    }).whenComplete(() {
+                    }).whenComplete(() async {
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(Provider.of<Authentication>(context,
+                                  listen: false)
+                              .userUid)
+                          .collection('posts')
+                          .add({
+                        'postimage': getUploadPostImageUrl,
+                        'caption': captioncontroller.text,
+                        'username': Provider.of<FirebaseOperation>(context,
+                                listen: false)
+                            .initUserName,
+                        'userimage': Provider.of<FirebaseOperation>(context,
+                                listen: false)
+                            .initUserImage,
+                        'useruid':
+                            Provider.of<Authentication>(context, listen: false)
+                                .getuserUid,
+                        'time': Timestamp.now(),
+                        'useremail': Provider.of<FirebaseOperation>(context,
+                                listen: false)
+                            .initUserEmail,
+                      });
+                    }).whenComplete(() async {
                       Navigator.pop(context);
                     });
                   },
-                  color: constantcolors.blueColor,
-                  child: Text(
-                    'Share',
-                    style: TextStyle(
-                        color: constantcolors.whiteColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold),
-                  ),
                 )
               ],
             ),

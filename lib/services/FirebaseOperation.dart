@@ -72,7 +72,7 @@ class FirebaseOperation with ChangeNotifier {
   }
 
   Future uploadPostData(String postId, dynamic data) async {
-    return FirebaseFirestore.instance.collection('post').doc(postId).set(data);
+    return FirebaseFirestore.instance.collection('posts').doc(postId).set(data);
   }
 
   Future deleteUserData(String postId, dynamic collection) async {

@@ -308,7 +308,10 @@ class ProfileHelper with ChangeNotifier {
     );
   }
 
-  Widget footerProfile(BuildContext context, dynamic snapshot) {
+  Widget footerProfile(
+    BuildContext context,
+    dynamic snapshot,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -317,6 +320,40 @@ class ProfileHelper with ChangeNotifier {
         decoration: BoxDecoration(
             color: constantcolors.blueColor,
             borderRadius: BorderRadius.circular(15.0)),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(Provider.of<Authentication>(context, listen: false)
+                  .getuserUid)
+              .collection('posts')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  children: snapshot.data!.docs
+                      .map((DocumentSnapshot documentSnapshot) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.00),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.53,
+                        width: MediaQuery.of(context).size.width,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.center,
+                          child: Image.network(documentSnapshot['postimage']),
+                        ),
+                      ),
+                    );
+                  }).toList());
+            }
+          },
+        ),
       ),
     );
   }

@@ -26,7 +26,7 @@ class FeedHelpers with ChangeNotifier {
         ),
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-              .collection('post')
+              .collection('posts')
               .orderBy('time', descending: true)
               .snapshots(),
           builder: ((context, snapshot) {
