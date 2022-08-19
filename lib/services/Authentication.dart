@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:m_finder/screens/Profile/Profile.dart';
+import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authentication with ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   late String userUid;
   String get getuserUid => userUid;
@@ -18,8 +19,17 @@ class Authentication with ChangeNotifier {
         .signInWithEmailAndPassword(email: email, password: password);
 
     User? user = userCredential.user;
-    userUid = user!.uid;
-    print(' User Uid = $userUid');
+    if (finalUid == '') {
+      userUid = user!.uid;
+      print(' User Uid = $userUid');
+    } else {
+      userUid = finalUid;
+    }
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString('uid', userUid);
+
     notifyListeners();
   }
 

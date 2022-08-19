@@ -8,6 +8,7 @@ import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/AltProfile/AltProfile.dart';
 import 'package:m_finder/screens/Homepage/Homepage.dart';
 import 'package:m_finder/screens/Profile/Profile.dart';
+import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:m_finder/utils/PostOptions.dart';
 import 'package:page_transition/page_transition.dart';
@@ -52,8 +53,8 @@ class FeedHelpers with ChangeNotifier {
       BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
     return ListView(
         children: snapshot.data!.docs.map((DocumentSnapshot documentSnapshot) {
-      Provider.of<PostFunctions>(context, listen: false)
-          .showTimeAgo(documentSnapshot['time']);
+      // Provider.of<PostFunctions>(context, listen: false)
+      //     .showTimeAgo(documentSnapshot['time']);
 
       return Container(
         height: MediaQuery.of(context).size.height * 0.5,
@@ -71,8 +72,11 @@ class FeedHelpers with ChangeNotifier {
                     child: GestureDetector(
                       onTap: () {
                         if (documentSnapshot['useruid'] !=
-                            Provider.of<Authentication>(context, listen: false)
-                                .getuserUid) {
+                            (finalUid == ''
+                                ? Provider.of<Authentication>(context,
+                                        listen: false)
+                                    .getuserUid
+                                : finalUid)) {
                           Navigator.pushReplacement(
                                   context,
                                   PageTransition(
@@ -118,11 +122,11 @@ class FeedHelpers with ChangeNotifier {
                                         fontSize: 14.00,
                                         fontWeight: FontWeight.bold),
                                     children: <TextSpan>[
-                                  TextSpan(
-                                      text:
-                                          ' ,${Provider.of<PostFunctions>(context, listen: false).imageTimePosted.toString()}',
-                                      style: TextStyle(
-                                          color: constantcolors.blackColor))
+                                  // TextSpan(
+                                  //     text:
+                                  //         ' ,${Provider.of<PostFunctions>(context, listen: false).imageTimePosted.toString()}',
+                                  //     style: TextStyle(
+                                  //         color: constantcolors.blackColor))
                                 ])),
                           ),
                         ],
@@ -135,8 +139,11 @@ class FeedHelpers with ChangeNotifier {
                     padding: const EdgeInsets.only(
                       right: 8.0,
                     ),
-                    child: Provider.of<Authentication>(context, listen: false)
-                                .getuserUid ==
+                    child: (finalUid == ''
+                                ? Provider.of<Authentication>(context,
+                                        listen: false)
+                                    .getuserUid
+                                : finalUid) ==
                             documentSnapshot['useruid']
                         ? IconButton(
                             onPressed: () {
@@ -190,9 +197,11 @@ class FeedHelpers with ChangeNotifier {
                                 .addLike(
                                     context,
                                     documentSnapshot['caption'],
-                                    Provider.of<Authentication>(context,
-                                            listen: false)
-                                        .getuserUid);
+                                    (finalUid == ''
+                                        ? Provider.of<Authentication>(context,
+                                                listen: false)
+                                            .getuserUid
+                                        : finalUid));
                           },
                           child: Icon(
                             FontAwesomeIcons.heart,

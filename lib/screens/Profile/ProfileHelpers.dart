@@ -6,9 +6,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/AltProfile/AltProfile.dart';
 import 'package:m_finder/screens/LandingPage/landingPage.dart';
+import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileHelper with ChangeNotifier {
   Constantcolors constantcolors = Constantcolors();
@@ -98,9 +100,11 @@ class ProfileHelper with ChangeNotifier {
                               StreamBuilder<QuerySnapshot>(
                                   stream: FirebaseFirestore.instance
                                       .collection('users')
-                                      .doc(Provider.of<Authentication>(context,
-                                              listen: false)
-                                          .getuserUid)
+                                      .doc(finalUid == ''
+                                          ? Provider.of<Authentication>(context,
+                                                  listen: false)
+                                              .getuserUid
+                                          : finalUid)
                                       .collection('followers')
                                       .snapshots(),
                                   builder: (context, snapshot) {
@@ -147,10 +151,12 @@ class ProfileHelper with ChangeNotifier {
                                 StreamBuilder<QuerySnapshot>(
                                     stream: FirebaseFirestore.instance
                                         .collection('users')
-                                        .doc(Provider.of<Authentication>(
-                                                context,
-                                                listen: false)
-                                            .getuserUid)
+                                        .doc(finalUid == ''
+                                            ? Provider.of<Authentication>(
+                                                    context,
+                                                    listen: false)
+                                                .getuserUid
+                                            : finalUid)
                                         .collection('following')
                                         .snapshots(),
                                     builder: (context, snapshot) {
@@ -270,8 +276,11 @@ class ProfileHelper with ChangeNotifier {
                 child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('users')
-                        .doc(Provider.of<Authentication>(context, listen: false)
-                            .getuserUid)
+                        .doc(finalUid == ''
+                            ? Provider.of<Authentication>(context,
+                                    listen: false)
+                                .getuserUid
+                            : finalUid)
                         .collection('followers')
                         .snapshots(),
                     builder: (context, snapshot) {
@@ -323,8 +332,10 @@ class ProfileHelper with ChangeNotifier {
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('users')
-              .doc(Provider.of<Authentication>(context, listen: false)
-                  .getuserUid)
+              .doc(finalUid == ''
+                  ? Provider.of<Authentication>(context, listen: false)
+                      .getuserUid
+                  : finalUid)
               .collection('posts')
               .snapshots(),
           builder: (context, snapshot) {
@@ -380,7 +391,6 @@ class ProfileHelper with ChangeNotifier {
                         color: constantcolors.whiteColor,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
                         decorationColor: constantcolors.whiteColor),
                   ),
                   onPressed: () {
@@ -394,18 +404,22 @@ class ProfileHelper with ChangeNotifier {
                         color: constantcolors.whiteColor,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.underline,
                         decorationColor: constantcolors.whiteColor),
                   ),
-                  onPressed: () {
-                    Provider.of<Authentication>(context, listen: false)
-                        .logOutViaEmail()
-                        .whenComplete(() {
-                      Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                              child: Landingpage(),
-                              type: PageTransitionType.bottomToTop));
+                  onPressed: () async {
+                    final SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.clear().whenComplete(() {
+                      print('########## All clear');
+                      Provider.of<Authentication>(context, listen: false)
+                          .logOutViaEmail()
+                          .whenComplete(() {
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                child: Landingpage(),
+                                type: PageTransitionType.bottomToTop));
+                      });
                     });
                   })
             ],
@@ -428,8 +442,10 @@ class ProfileHelper with ChangeNotifier {
             child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('users')
-                    .doc(Provider.of<Authentication>(context, listen: false)
-                        .getuserUid)
+                    .doc(finalUid == ''
+                        ? Provider.of<Authentication>(context, listen: false)
+                            .getuserUid
+                        : finalUid)
                     .collection('following')
                     .snapshots(),
                 builder: (context, snapshot) {

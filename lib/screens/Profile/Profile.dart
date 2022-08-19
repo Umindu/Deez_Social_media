@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/LandingPage/landingPage.dart';
 import 'package:m_finder/screens/Profile/ProfileHelpers.dart';
+import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -63,8 +64,10 @@ class Profile extends StatelessWidget {
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('users')
-                  .doc(Provider.of<Authentication>(context, listen: false)
-                      .getuserUid)
+                  .doc(finalUid == ''
+                      ? Provider.of<Authentication>(context, listen: false)
+                          .getuserUid
+                      : finalUid)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

@@ -58,31 +58,39 @@ class landingHelpers with ChangeNotifier {
 
   Widget mainButton(BuildContext context) {
     return Positioned(
-        top: 520.00,
-        child: Container(
+      top: 520.00,
+      child: Container(
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(
-                onTap: () {
-                  emailAuthSheet(context);
-                },
-                child: Container(
-                  height: 40.00,
-                  width: 80.00,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: constantcolors.yellowColor),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: Icon(
-                    EvaIcons.emailOutline,
-                    color: constantcolors.yellowColor,
+              MaterialButton(
+                  child: Text(
+                    'Log in',
+                    style: TextStyle(
+                        color: constantcolors.blackColor,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold),
                   ),
-                ),
-              ),
+                  onPressed: () {
+                    Provider.of<LandingService>(context, listen: false)
+                        .logInSheet(context);
+                  }),
+              MaterialButton(
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                        color: constantcolors.blackColor,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Provider.of<LandingUtils>(context, listen: false)
+                        .selectAvatarOptionsSheet(context);
+                  })
             ],
-          ),
-        ));
+          )),
+    );
   }
   //...........................................................................................................................
 
@@ -105,62 +113,5 @@ class landingHelpers with ChangeNotifier {
             ],
           ),
         ));
-  }
-
-  emailAuthSheet(BuildContext context) {
-    return showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: constantcolors.blueGreyColor,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15.00),
-                    topRight: Radius.circular(15.00))),
-            child: Column(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 150.00),
-                    child: Divider(
-                      thickness: 4.00,
-                      color: constantcolors.whiteColor,
-                    )),
-                Provider.of<LandingService>(context, listen: false)
-                    .passwordLessSignIn(context),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MaterialButton(
-                        child: Text(
-                          'Log in',
-                          style: TextStyle(
-                              color: constantcolors.whiteColor,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          Provider.of<LandingService>(context, listen: false)
-                              .logInSheet(context);
-                        }),
-                    MaterialButton(
-                        child: Text(
-                          'Sign up',
-                          style: TextStyle(
-                              color: constantcolors.whiteColor,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          Provider.of<LandingUtils>(context, listen: false)
-                              .selectAvatarOptionsSheet(context);
-                        })
-                  ],
-                )
-              ],
-            ),
-          );
-        });
   }
 }

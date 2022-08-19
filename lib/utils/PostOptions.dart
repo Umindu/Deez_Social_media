@@ -21,13 +21,13 @@ class PostFunctions with ChangeNotifier {
   late String imageTimePosted;
   String get getImageTimePosted => imageTimePosted;
 
-  showTimeAgo(dynamic timedata) {
-    Timestamp time = timedata;
-    DateTime dateTime = time.toDate();
-    imageTimePosted = timeago.format(dateTime);
-    print(imageTimePosted);
-    notifyListeners();
-  }
+  // showTimeAgo(dynamic timedata) {
+  //   Timestamp time = timedata;
+  //   DateTime dateTime = time.toDate();
+  //   imageTimePosted = timeago.format(dateTime);
+  //   print(imageTimePosted);
+  //   notifyListeners();
+  // }
 
   showPostOptions(BuildContext context, String postId) {
     return showModalBottomSheet(
