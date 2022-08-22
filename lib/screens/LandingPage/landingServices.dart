@@ -83,54 +83,6 @@ class LandingService with ChangeNotifier {
         });
   }
 
-  Widget passwordLessSignIn(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.40,
-      width: MediaQuery.of(context).size.width,
-      child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('users').snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return ListView(
-                  children: snapshot.data!.docs
-                      .map((DocumentSnapshot documentSnapshot) {
-                return ListTile(
-                  trailing: IconButton(
-                    icon: Icon(
-                      FontAwesomeIcons.trash,
-                      color: constantcolors.redColor,
-                    ),
-                    onPressed: (() {}),
-                  ),
-                  leading: CircleAvatar(
-                    backgroundColor: constantcolors.transparent,
-                    backgroundImage:
-                        NetworkImage(documentSnapshot['userimage']),
-                  ),
-                  subtitle: Text(
-                    documentSnapshot['useremail'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: constantcolors.greenColor,
-                        fontSize: 12.00),
-                  ),
-                  title: Text(
-                    documentSnapshot['username'],
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: constantcolors.greenColor),
-                  ),
-                );
-              }).toList());
-            }
-          }),
-    );
-  }
-
   logInSheet(BuildContext context) {
     return showModalBottomSheet(
         isScrollControlled: true,

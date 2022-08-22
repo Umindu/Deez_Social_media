@@ -49,6 +49,7 @@ dependencies:
   get: ^4.6.5
   lottie: ^1.4.1
   timeago: ^3.3.0
+  google_fonts: 
   
 
 dev_dependencies:

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/AltProfile/AltProfile.dart';
+import 'package:m_finder/screens/LandingPage/Login.dart';
 import 'package:m_finder/screens/LandingPage/landingPage.dart';
 import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
@@ -417,7 +418,7 @@ class ProfileHelper with ChangeNotifier {
                         Navigator.pushReplacement(
                             context,
                             PageTransition(
-                                child: Landingpage(),
+                                child: LoginPage(),
                                 type: PageTransitionType.bottomToTop));
                       });
                     });

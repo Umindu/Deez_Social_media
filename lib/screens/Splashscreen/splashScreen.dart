@@ -5,6 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/Homepage/Homepage.dart';
+import 'package:m_finder/screens/LandingPage/Login.dart';
+import 'package:m_finder/screens/LandingPage/Signup.dart';
 import 'package:m_finder/screens/LandingPage/landingPage.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:page_transition/page_transition.dart';
@@ -41,14 +43,14 @@ class _SplashscreenState extends State<Splashscreen> {
             () => Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.leftToRight, child: Homepage())));
+                    type: PageTransitionType.bottomToTop, child: Homepage())));
       } else {
         Timer(
             const Duration(seconds: 1),
             () => Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.leftToRight,
+                    type: PageTransitionType.bottomToTop,
                     child: Landingpage())));
       }
     });
@@ -58,27 +60,45 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: constantcolors.darkColor,
-      body: Center(
-          child: RichText(
-        text: TextSpan(
-            text: 'Medicine',
-            style: TextStyle(
-                fontFamily: 'Poppins',
-                color: constantcolors.whiteColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 30.00),
-            children: <TextSpan>[
-              TextSpan(
-                text: 'Finder',
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: constantcolors.blueColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 34.00),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                constantcolors.darkpurple,
+                constantcolors.purple,
+              ])),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              RichText(
+                text: TextSpan(
+                    text: 'Medicine',
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: constantcolors.whiteColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 34.00),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Finder',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: constantcolors.blackColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 34.00),
+                      )
+                    ]),
               )
-            ]),
-      )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

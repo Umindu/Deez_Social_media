@@ -13,11 +13,15 @@ class landingHelpers with ChangeNotifier {
   Constantcolors constantcolors = Constantcolors();
 
   Widget bodyImage(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.65,
-      width: MediaQuery.of(context).size.width,
-      decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/login.png'))),
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.25,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+            image:
+                DecorationImage(image: AssetImage('assets/images/login.png'))),
+      ),
     );
   }
 
@@ -25,7 +29,7 @@ class landingHelpers with ChangeNotifier {
 
   Widget taglineText(BuildContext context) {
     return Positioned(
-      top: 400.0,
+      top: 250.0,
       left: 10.0,
       child: Container(
         constraints: const BoxConstraints(
