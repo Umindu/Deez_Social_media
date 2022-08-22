@@ -89,8 +89,8 @@ class landingHelpers with ChangeNotifier {
                         fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
-                    Provider.of<LandingUtils>(context, listen: false)
-                        .selectAvatarOptionsSheet(context);
+                    Provider.of<LandingService>(context, listen: false)
+                        .signInsheet(context);
                   })
             ],
           )),

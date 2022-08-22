@@ -72,7 +72,78 @@ class LandingService with ChangeNotifier {
                           Provider.of<FirebaseOperation>(context, listen: false)
                               .uploadUserAvatar(context)
                               .whenComplete(() {
-                            signInsheet(context);
+                            Done(context);
+                          });
+                        })
+                  ],
+                ),
+              )
+            ]),
+          );
+        });
+  }
+
+  Done(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: constantcolors.blueGreyColor,
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: Column(children: [
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 150.00),
+                  child: Divider(
+                    thickness: 4.00,
+                    color: constantcolors.whiteColor,
+                  )),
+              CircleAvatar(
+                radius: 80.0,
+                backgroundColor: constantcolors.transparent,
+                backgroundImage: FileImage(
+                    Provider.of<LandingUtils>(context, listen: false)
+                        .userAvatar),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MaterialButton(
+                        color: constantcolors.blackColor,
+                        child: Text(
+                          'Done',
+                          style: TextStyle(
+                            color: constantcolors.whiteColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: () {
+                          Provider.of<FirebaseOperation>(context, listen: false)
+                              .uploadUserAvatar(context)
+                              .whenComplete(() {
+                            print('Creating collection');
+                            Provider.of<FirebaseOperation>(context,
+                                    listen: false)
+                                .createUserCollection(context, {
+                              'userid': Provider.of<Authentication>(context,
+                                      listen: false)
+                                  .getuserUid,
+                              'useremail': useremailController.text,
+                              'username': userNameController.text,
+                              'userimage': Provider.of<LandingUtils>(context,
+                                      listen: false)
+                                  .getUserAvatarUrl,
+                            });
+                          }).whenComplete(() {
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    child: Homepage(),
+                                    type: PageTransitionType.bottomToTop));
                           });
                         })
                   ],
@@ -200,13 +271,13 @@ class LandingService with ChangeNotifier {
                             thickness: 4.00,
                             color: constantcolors.whiteColor,
                           )),
-                      CircleAvatar(
-                        backgroundImage: FileImage(
-                            Provider.of<LandingUtils>(context, listen: false)
-                                .getuserAvatar),
-                        backgroundColor: constantcolors.redColor,
-                        radius: 60.00,
-                      ),
+                      // CircleAvatar(
+                      //   backgroundImage: FileImage(
+                      //       Provider.of<LandingUtils>(context, listen: false)
+                      //           .getuserAvatar),
+                      //   backgroundColor: constantcolors.redColor,
+                      //   radius: 60.00,
+                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.00),
                         child: TextField(
@@ -273,28 +344,9 @@ class LandingService with ChangeNotifier {
                                     .createAccount(useremailController.text,
                                         userpasswordController.text)
                                     .whenComplete(() {
-                                  print('Creating collection');
-                                  Provider.of<FirebaseOperation>(context,
+                                  Provider.of<LandingUtils>(context,
                                           listen: false)
-                                      .createUserCollection(context, {
-                                    'userid': Provider.of<Authentication>(
-                                            context,
-                                            listen: false)
-                                        .getuserUid,
-                                    'useremail': useremailController.text,
-                                    'username': userNameController.text,
-                                    'userimage': Provider.of<LandingUtils>(
-                                            context,
-                                            listen: false)
-                                        .getUserAvatarUrl,
-                                  });
-                                }).whenComplete(() {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      PageTransition(
-                                          child: Homepage(),
-                                          type:
-                                              PageTransitionType.bottomToTop));
+                                      .selectAvatarOptionsSheet(context);
                                 });
                               } else {
                                 warningText(context, 'Fill all the data!');
