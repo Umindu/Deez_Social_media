@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:m_finder/screens/LandingPage/landingUtils.dart';
+import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +54,9 @@ class FirebaseOperation with ChangeNotifier {
   Future initUserData(BuildContext context) async {
     return FirebaseFirestore.instance
         .collection('users')
-        .doc(Provider.of<Authentication>(context, listen: false).getuserUid)
+        .doc(finalUid == ''
+            ? Provider.of<Authentication>(context, listen: false).getuserUid
+            : finalUid)
         .get()
         .then((doc) async {
       print('Fetching user data');
