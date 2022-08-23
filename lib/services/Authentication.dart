@@ -40,6 +40,10 @@ class Authentication with ChangeNotifier {
     User? user = userCredential.user;
     userUid = user!.uid;
     print(' User Uid = $userUid');
+
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString('uid', userUid);
     notifyListeners();
   }
 

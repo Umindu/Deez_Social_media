@@ -33,6 +33,7 @@ class FirebaseOperation with ChangeNotifier {
     await imageUploadTask.whenComplete(() {
       print('Image Uploaded !');
     });
+
     imageReference.getDownloadURL().then((url) {
       Provider.of<LandingUtils>(context, listen: false).userAvatarUrl =
           url.toString();

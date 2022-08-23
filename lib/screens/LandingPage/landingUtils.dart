@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
-import 'package:m_finder/screens/LandingPage/landingServices.dart';
+import 'package:m_finder/screens/LandingPage/getAvatar.dart';
 import 'package:provider/provider.dart';
 
 class LandingUtils with ChangeNotifier {
@@ -22,8 +22,8 @@ class LandingUtils with ChangeNotifier {
     print(userAvatar.path);
 
     userAvatar != null
-        ? Provider.of<LandingService>(context, listen: false)
-            .showUserAvatar(context)
+        ? Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => getAvatarPage()))
         : print('Image upload error');
     notifyListeners();
   }
@@ -62,8 +62,10 @@ class LandingUtils with ChangeNotifier {
                           pickUserAvatar(context, ImageSource.gallery)
                               .whenComplete(() {
                             Navigator.pop(context);
-                            Provider.of<LandingService>(context, listen: false)
-                                .showUserAvatar(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => getAvatarPage()));
                           });
                         }),
                     MaterialButton(
@@ -79,8 +81,7 @@ class LandingUtils with ChangeNotifier {
                           pickUserAvatar(context, ImageSource.camera)
                               .whenComplete(() {
                             Navigator.pop(context);
-                            Provider.of<LandingService>(context, listen: false)
-                                .showUserAvatar(context);
+                            getAvatarPage();
                           });
                         })
                   ],

@@ -7,11 +7,12 @@ import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/Homepage/Homepage.dart';
 import 'package:m_finder/screens/LandingPage/Login.dart';
 import 'package:m_finder/screens/LandingPage/Signup.dart';
-import 'package:m_finder/screens/LandingPage/landingPage.dart';
+import 'package:m_finder/screens/LandingPage/getAvatar.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+String name = ' ';
 late String finalUid = '';
 
 class Splashscreen extends StatefulWidget {
@@ -50,8 +51,7 @@ class _SplashscreenState extends State<Splashscreen> {
             () => Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.bottomToTop,
-                    child: Landingpage())));
+                    type: PageTransitionType.bottomToTop, child: LoginPage())));
       }
     });
     super.initState();

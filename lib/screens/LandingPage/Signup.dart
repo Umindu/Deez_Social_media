@@ -13,10 +13,14 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 Constantcolors constantcolors = Constantcolors();
+late String getusername;
+late String getuseremail;
 
 class SingUpPage extends StatefulWidget {
   SingUpPage({Key? key}) : super(key: key);
 
+  get username => getusername;
+  get useremail => getuseremail;
   @override
   State<SingUpPage> createState() => _LoginPageState();
 }
@@ -138,30 +142,16 @@ class _LoginPageState extends State<SingUpPage> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        getusername = userNameController.text;
+                        getuseremail = emailController.text;
+
                         if (emailController.text.isNotEmpty) {
                           Provider.of<Authentication>(context, listen: false)
                               .createAccount(
                                   emailController.text, passwordController.text)
                               .whenComplete(() {
-                            print('Creating collection');
-                            Provider.of<FirebaseOperation>(context,
-                                    listen: false)
-                                .createUserCollection(context, {
-                              'userid': Provider.of<Authentication>(context,
-                                      listen: false)
-                                  .getuserUid,
-                              'useremail': emailController.text,
-                              'username': userNameController.text,
-                              'userimage': Provider.of<LandingUtils>(context,
-                                      listen: false)
-                                  .getUserAvatarUrl,
-                            });
-                          }).whenComplete(() {
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    child: Homepage(),
-                                    type: PageTransitionType.bottomToTop));
+                            Provider.of<LandingUtils>(context, listen: false)
+                                .selectAvatarOptionsSheet(context);
                           });
                         } else {}
                       },
