@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
+import 'package:m_finder/main.dart';
 import 'package:m_finder/screens/Feed/Feed_helpers.dart';
 import 'package:m_finder/utils/UploadPost.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +15,16 @@ class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
       appBar: AppBar(
-        backgroundColor: constantcolors.blueColor,
-        centerTitle: true,
+        bottom: PreferredSize(
+            child: Container(
+              color: Colors.grey,
+              height: 2.0,
+            ),
+            preferredSize: Size.fromHeight(6.0)),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: constantcolors.whiteColor,
         actions: [
           IconButton(
               onPressed: () {
@@ -27,15 +34,20 @@ class Feed extends StatelessWidget {
               icon: Icon(
                 Icons.camera_enhance_rounded,
                 color: constantcolors.blackColor,
-              ))
+              )),
+          // Switch(
+          //     value: _themeManager == ThemeMode.dark,
+          //     onChanged: (newValue) {
+          //    _themeManager.toggleTheme(newValue);
+          //     })
         ],
         title: RichText(
             text: TextSpan(
                 text: 'Medicine',
                 style: TextStyle(
-                  color: constantcolors.whiteColor,
+                  color: constantcolors.darkpurple,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20.00,
+                  fontSize: 30.00,
                 ),
                 children: <TextSpan>[
               TextSpan(

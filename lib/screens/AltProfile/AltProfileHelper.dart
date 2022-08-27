@@ -19,267 +19,149 @@ class AltProfileHelper with ChangeNotifier {
     String userUid,
   ) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.44,
+      height: MediaQuery.of(context).size.height * 0.33,
       width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 200.00,
-                width: 180.00,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 1.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.00),
-                      child: GestureDetector(
-                          onTap: () {},
-                          child: CircleAvatar(
-                            backgroundColor: constantcolors.transparent,
-                            radius: 60.0,
-                            backgroundImage:
-                                NetworkImage(snapshot.data.data()['userimage']),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 7.0),
-                      child: Text(
-                        snapshot.data.data()['username'],
-                        style: TextStyle(
-                          color: constantcolors.darkColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    Container(
+                      child: Column(
                         children: [
-                          Icon(
-                            EvaIcons.email,
-                            color: constantcolors.greenColor,
-                            size: 16.00,
-                          ),
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(userUid)
+                                  .collection('followers')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return Text(
+                                    snapshot.data!.docs.length.toString(),
+                                    style: TextStyle(
+                                        color: constantcolors.blackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28.0),
+                                  );
+                                }
+                              }),
                           Text(
-                            snapshot.data.data()['useremail'],
+                            'Followers',
                             style: TextStyle(
-                              color: constantcolors.darkColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12.0,
-                            ),
+                                color: constantcolors.blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.0),
                           ),
                         ],
                       ),
-                    )
+                    ),
+                    Container(
+                      height: 200.00,
+                      width: 180.00,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.00),
+                            child: GestureDetector(
+                                onTap: () {},
+                                child: CircleAvatar(
+                                  backgroundColor: constantcolors.transparent,
+                                  radius: 60.0,
+                                  backgroundImage: NetworkImage(
+                                      snapshot.data.data()['userimage']),
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 7.0),
+                            child: Text(
+                              snapshot.data.data()['username'],
+                              style: TextStyle(
+                                color: constantcolors.blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  EvaIcons.email,
+                                  color: constantcolors.greenColor,
+                                  size: 16.00,
+                                ),
+                                Text(
+                                  snapshot.data.data()['useremail'],
+                                  style: TextStyle(
+                                    color: constantcolors.blackColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(userUid)
+                                  .collection('following')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return Text(
+                                    snapshot.data!.docs.length.toString(),
+                                    style: TextStyle(
+                                        color: constantcolors.blackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28.0),
+                                  );
+                                }
+                              }),
+                          Text(
+                            'Following',
+                            style: TextStyle(
+                                color: constantcolors.blackColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.0),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Container(
-                width: 200.00,
-                height: 180,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: constantcolors.darkColor,
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              height: 70.00,
-                              width: 80.00,
-                              child: Column(
-                                children: [
-                                  StreamBuilder<QuerySnapshot>(
-                                      stream: FirebaseFirestore.instance
-                                          .collection('users')
-                                          .doc(userUid)
-                                          .collection('followers')
-                                          .snapshots(),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return const Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        } else {
-                                          return Text(
-                                            snapshot.data!.docs.length
-                                                .toString(),
-                                            style: TextStyle(
-                                                color:
-                                                    constantcolors.whiteColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0),
-                                          );
-                                        }
-                                      }),
-                                  Text(
-                                    'Followers',
-                                    style: TextStyle(
-                                        color: constantcolors.whiteColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12.0),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: constantcolors.darkColor,
-                                  borderRadius: BorderRadius.circular(15.0)),
-                              height: 70.00,
-                              width: 80.00,
-                              child: Column(
-                                children: [
-                                  StreamBuilder<QuerySnapshot>(
-                                      stream: FirebaseFirestore.instance
-                                          .collection('users')
-                                          .doc(userUid)
-                                          .collection('following')
-                                          .snapshots(),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return const Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        } else {
-                                          return Text(
-                                            snapshot.data!.docs.length
-                                                .toString(),
-                                            style: TextStyle(
-                                                color:
-                                                    constantcolors.whiteColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 28.0),
-                                          );
-                                        }
-                                      }),
-                                  Text(
-                                    'Following',
-                                    style: TextStyle(
-                                        color: constantcolors.whiteColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12.0),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: constantcolors.darkColor,
-                              borderRadius: BorderRadius.circular(15.0)),
-                          height: 70.00,
-                          width: 80.00,
-                          child: Column(
-                            children: [
-                              Text(
-                                '0',
-                                style: TextStyle(
-                                    color: constantcolors.whiteColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 28.0),
-                              ),
-                              Text(
-                                'Post',
-                                style: TextStyle(
-                                    color: constantcolors.whiteColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ]),
-              )
-            ],
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.12,
-            width: MediaQuery.of(context).size.width,
-            color: constantcolors.whiteColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                MaterialButton(
-                    color: constantcolors.blackColor,
-                    onPressed: () {
-                      Provider.of<FirebaseOperation>(context, listen: false)
-                          .followUser(
-                              userUid,
-                              Provider.of<Authentication>(context,
-                                      listen: false)
-                                  .getuserUid,
-                              {
-                                'username': Provider.of<FirebaseOperation>(
-                                        context,
-                                        listen: false)
-                                    .initUserName,
-                                'userimage': Provider.of<FirebaseOperation>(
-                                        context,
-                                        listen: false)
-                                    .initUserImage,
-                                'useruid': Provider.of<Authentication>(context,
-                                        listen: false)
-                                    .getuserUid,
-                                'useremail': Provider.of<FirebaseOperation>(
-                                        context,
-                                        listen: false)
-                                    .initUserEmail,
-                                'time': Timestamp.now()
-                              },
-                              Provider.of<Authentication>(context,
-                                      listen: false)
-                                  .getuserUid,
-                              userUid,
-                              {
-                                'username': snapshot.data.data()['username'],
-                                'userimage': snapshot.data.data()['userimage'],
-                                'useremail': snapshot.data.data()['useremail'],
-                                'useruid': snapshot.data.data()['useruid'],
-                                'time': Timestamp.now()
-                              })
-                          .whenComplete(() {});
-                    },
-                    child: Text(
-                      'Follow',
-                      style: TextStyle(
-                          color: constantcolors.whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0),
-                    )),
-                MaterialButton(
-                    color: constantcolors.blackColor,
-                    onPressed: () {},
-                    child: Text(
-                      'Message',
-                      style: TextStyle(
-                          color: constantcolors.whiteColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0),
-                    )),
-              ],
-            ),
+            ]),
           )
         ],
       ),

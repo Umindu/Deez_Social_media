@@ -1,5 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:m_finder/Setting/Setting.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/Chatroom/Chatroom.dart';
 import 'package:m_finder/screens/Feed/Feed.dart';
@@ -31,7 +33,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: constantcolors.blueColor,
+        backgroundColor: constantcolors.greyColor,
         body: PageView(
           controller: homePageController,
           physics: NeverScrollableScrollPhysics(),
@@ -44,6 +46,7 @@ class _HomepageState extends State<Homepage> {
             Feed(),
             Chatroom(),
             Profile(),
+            SettingPage(),
           ],
         ),
         bottomNavigationBar:

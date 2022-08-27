@@ -18,6 +18,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           icon: Icon(
             EvaIcons.settings2Outline,
@@ -35,12 +36,12 @@ class Profile extends StatelessWidget {
                     .logOutDialog(context);
               })
         ],
-        backgroundColor: constantcolors.blueColor,
+        backgroundColor: constantcolors.whiteColor,
         title: RichText(
             text: TextSpan(
                 text: 'My',
                 style: TextStyle(
-                  color: constantcolors.whiteColor,
+                  color: constantcolors.purple,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.00,
                 ),
@@ -59,7 +60,7 @@ class Profile extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: constantcolors.whiteColor),
+          decoration: BoxDecoration(color: constantcolors.greyColor),
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('users')

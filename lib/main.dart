@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:m_finder/Setting/Theme_constants.dart';
+import 'package:m_finder/Setting/Theme_manager.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/AltProfile/AltProfileHelper.dart';
 import 'package:m_finder/screens/Feed/Feed_helpers.dart';
@@ -12,6 +14,8 @@ import 'package:m_finder/services/FirebaseOperation.dart';
 import 'package:m_finder/utils/PostOptions.dart';
 import 'package:m_finder/utils/UploadPost.dart';
 import 'package:provider/provider.dart';
+
+ThemeManager _themeManager = ThemeManager();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,12 +44,16 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           home: const Splashscreen(),
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            fontFamily: 'Poppins',
-            canvasColor: Colors.transparent,
-            colorScheme: ColorScheme.fromSwatch()
-                .copyWith(secondary: constantcolors.blueColor),
-          ),
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.dark,
+
+          // ThemeData(
+          //   fontFamily: 'Poppins',
+          //   canvasColor: Colors.transparent,
+          //   colorScheme: ColorScheme.fromSwatch()
+          //       .copyWith(secondary: constantcolors.blueColor),
+          // ),
         ));
   }
 }

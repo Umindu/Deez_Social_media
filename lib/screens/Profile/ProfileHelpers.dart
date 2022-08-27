@@ -20,204 +20,211 @@ class ProfileHelper with ChangeNotifier {
     dynamic snapshot,
   ) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.33,
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // Container(
+          //   height: 330.00,
+          //   width: 180.00,
+          //   child: Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Padding(
+          //         padding: const EdgeInsets.only(top: 1.00),
+          //         child: GestureDetector(
+          //             onTap: () {},
+          //             child: CircleAvatar(
+          //               backgroundColor: constantcolors.transparent,
+          //               radius: 60.0,
+          //               backgroundImage:
+          //                   NetworkImage(snapshot.data.data()['userimage']),
+          //             )),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.only(top: 7.0),
+          //         child: Text(
+          //           snapshot.data.data()['username'],
+          //           style: TextStyle(
+          //             color: constantcolors.darkColor,
+          //             fontWeight: FontWeight.bold,
+          //             fontSize: 20.0,
+          //           ),
+          //         ),
+          //       ),
+          //       Padding(
+          //         padding: const EdgeInsets.only(top: 5.0),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.center,
+          //           children: [
+          //             Icon(
+          //               EvaIcons.email,
+          //               color: constantcolors.greenColor,
+          //               size: 16.00,
+          //             ),
+          //             Text(
+          //               snapshot.data.data()['useremail'],
+          //               style: TextStyle(
+          //                 color: constantcolors.darkColor,
+          //                 fontWeight: FontWeight.bold,
+          //                 fontSize: 12.0,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
           Container(
-            height: 330.00,
-            width: 180.00,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 1.00),
-                  child: GestureDetector(
-                      onTap: () {},
-                      child: CircleAvatar(
-                        backgroundColor: constantcolors.transparent,
-                        radius: 60.0,
-                        backgroundImage:
-                            NetworkImage(snapshot.data.data()['userimage']),
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 7.0),
-                  child: Text(
-                    snapshot.data.data()['username'],
-                    style: TextStyle(
-                      color: constantcolors.darkColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        EvaIcons.email,
-                        color: constantcolors.greenColor,
-                        size: 16.00,
-                      ),
-                      Text(
-                        snapshot.data.data()['useremail'],
-                        style: TextStyle(
-                          color: constantcolors.darkColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Container(
-            width: 200.00,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: constantcolors.darkColor,
-                              borderRadius: BorderRadius.circular(15.0)),
-                          height: 70.00,
-                          width: 80.00,
-                          child: Column(
-                            children: [
-                              StreamBuilder<QuerySnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(finalUid == ''
-                                          ? Provider.of<Authentication>(context,
-                                                  listen: false)
-                                              .getuserUid
-                                          : finalUid)
-                                      .collection('followers')
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    } else {
-                                      return Text(
-                                        snapshot.data!.docs.length.toString(),
-                                        style: TextStyle(
-                                            color: constantcolors.whiteColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 28.0),
-                                      );
-                                    }
-                                  }),
-                              Text(
-                                'Followers',
-                                style: TextStyle(
-                                    color: constantcolors.whiteColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            checkFollowingSheet(
-                              context,
-                              snapshot,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: constantcolors.darkColor,
-                                borderRadius: BorderRadius.circular(15.0)),
-                            height: 70.00,
-                            width: 80.00,
-                            child: Column(
-                              children: [
-                                StreamBuilder<QuerySnapshot>(
-                                    stream: FirebaseFirestore.instance
-                                        .collection('users')
-                                        .doc(finalUid == ''
-                                            ? Provider.of<Authentication>(
-                                                    context,
-                                                    listen: false)
-                                                .getuserUid
-                                            : finalUid)
-                                        .collection('following')
-                                        .snapshots(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return const Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      } else {
-                                        return Text(
-                                          snapshot.data!.docs.length.toString(),
-                                          style: TextStyle(
-                                              color: constantcolors.whiteColor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 28.0),
-                                        );
-                                      }
-                                    }),
-                                Text(
-                                  'Following',
-                                  style: TextStyle(
-                                      color: constantcolors.whiteColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: constantcolors.darkColor,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      height: 70.00,
-                      width: 80.00,
+            width: MediaQuery.of(context).size.width,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
                       child: Column(
                         children: [
+                          StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(finalUid == ''
+                                      ? Provider.of<Authentication>(context,
+                                              listen: false)
+                                          .getuserUid
+                                      : finalUid)
+                                  .collection('followers')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return Text(
+                                    snapshot.data!.docs.length.toString(),
+                                    style: TextStyle(
+                                        color: constantcolors.blackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 28.0),
+                                  );
+                                }
+                              }),
                           Text(
-                            '0',
+                            'Followers',
                             style: TextStyle(
-                                color: constantcolors.whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.0),
-                          ),
-                          Text(
-                            'Post',
-                            style: TextStyle(
-                                color: constantcolors.whiteColor,
+                                color: constantcolors.blackColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12.0),
                           ),
                         ],
                       ),
                     ),
-                  )
-                ]),
+                    Container(
+                      height: 200.00,
+                      width: 180.00,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 1.00),
+                            child: GestureDetector(
+                                onTap: () {},
+                                child: CircleAvatar(
+                                  backgroundColor: constantcolors.transparent,
+                                  radius: 60.0,
+                                  backgroundImage: NetworkImage(
+                                      snapshot.data.data()['userimage']),
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 7.0),
+                            child: Text(
+                              snapshot.data.data()['username'],
+                              style: TextStyle(
+                                color: constantcolors.darkColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  snapshot.data.data()['useremail'],
+                                  style: TextStyle(
+                                    color: constantcolors.darkColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        checkFollowingSheet(
+                          context,
+                          snapshot,
+                        );
+                      },
+                      child: Container(
+                        child: Column(
+                          children: [
+                            StreamBuilder<QuerySnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(finalUid == ''
+                                        ? Provider.of<Authentication>(context,
+                                                listen: false)
+                                            .getuserUid
+                                        : finalUid)
+                                    .collection('following')
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    return Text(
+                                      snapshot.data!.docs.length.toString(),
+                                      style: TextStyle(
+                                          color: constantcolors.blackColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 28.0),
+                                    );
+                                  }
+                                }),
+                            Text(
+                              'Following',
+                              style: TextStyle(
+                                  color: constantcolors.blackColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
           )
         ],
       ),
@@ -227,9 +234,9 @@ class ProfileHelper with ChangeNotifier {
   Widget divider() {
     return Center(
       child: SizedBox(
-        height: 50.00,
+        height: 30.00,
         width: 350.0,
-        child: Divider(color: constantcolors.darkColor),
+        child: Divider(color: constantcolors.blackColor),
       ),
     );
   }
@@ -260,7 +267,7 @@ class ProfileHelper with ChangeNotifier {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.00,
-                        color: constantcolors.darkColor),
+                        color: constantcolors.blackColor),
                   )
                 ],
               ),
@@ -271,7 +278,7 @@ class ProfileHelper with ChangeNotifier {
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: constantcolors.blueColor,
+                    color: constantcolors.whiteColor,
                     borderRadius: BorderRadius.circular(15.0)),
                 child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
@@ -327,7 +334,7 @@ class ProfileHelper with ChangeNotifier {
         height: MediaQuery.of(context).size.height * 0.44,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            color: constantcolors.blueColor,
+            color: constantcolors.whiteColor,
             borderRadius: BorderRadius.circular(15.0)),
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance

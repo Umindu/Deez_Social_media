@@ -21,108 +21,94 @@ class PostFunctions with ChangeNotifier {
   late String imageTimePosted;
   String get getImageTimePosted => imageTimePosted;
 
-  // showTimeAgo(dynamic timedata) {
-  //   Timestamp time = timedata;
-  //   DateTime dateTime = time.toDate();
-  //   imageTimePosted = timeago.format(dateTime);
-  //   print(imageTimePosted);
-  //   notifyListeners();
-  // }
+  showTimeAgo(dynamic timedata) {
+    Timestamp time = timedata;
+    DateTime dateTime = time.toDate();
+    imageTimePosted = timeago.format(dateTime);
+    print(imageTimePosted);
+    notifyListeners();
+  }
 
   showPostOptions(BuildContext context, String postId) {
     return showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.2,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: constantcolors.blueColor,
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12.0),
-                    topRight: Radius.circular(12.0))),
-            child: Column(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 150.00),
-                    child: Divider(
-                      thickness: 4.00,
-                      color: constantcolors.whiteColor,
-                    )),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MaterialButton(
-                          child: Text(
-                            'Edit',
+      context: context,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+              color: constantcolors.whiteColor,
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0))),
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: Icon(Icons.share),
+                title: Text('Share'),
+              ),
+              ListTile(
+                leading: Icon(Icons.copy),
+                title: Text('Copy Link'),
+              ),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Edit'),
+              ),
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Text('Delete'),
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0))),
+                          title: Text(
+                            'Delete This Post ?',
                             style: TextStyle(
                                 color: constantcolors.blackColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16.0),
                           ),
-                          onPressed: () {}),
-                      MaterialButton(
-                          child: Text(
-                            'Delete',
-                            style: TextStyle(
-                                color: constantcolors.blackColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0),
-                          ),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      'Delete This Post ?',
-                                      style: TextStyle(
-                                          color: constantcolors.blackColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0),
-                                    ),
-                                    actions: [
-                                      MaterialButton(
-                                          child: Text(
-                                            'No',
-                                            style: TextStyle(
-                                                color:
-                                                    constantcolors.blackColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          }),
-                                      MaterialButton(
-                                          child: Text(
-                                            'Yes',
-                                            style: TextStyle(
-                                                color: constantcolors.redColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16.0),
-                                          ),
-                                          onPressed: () {
-                                            Provider.of<FirebaseOperation>(
-                                                    context,
-                                                    listen: false)
-                                                .deleteUserData(postId, 'post')
-                                                .whenComplete(() {
-                                              Navigator.pop(context);
-                                            });
-                                          }),
-                                    ],
-                                  );
-                                });
-                          })
-                    ],
-                  ),
-                )
-              ],
-            ),
-          );
-        });
+                          actions: [
+                            MaterialButton(
+                                child: Text(
+                                  'No',
+                                  style: TextStyle(
+                                      color: constantcolors.blackColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                            MaterialButton(
+                                child: Text(
+                                  'Yes',
+                                  style: TextStyle(
+                                      color: constantcolors.redColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0),
+                                ),
+                                onPressed: () {
+                                  Provider.of<FirebaseOperation>(context,
+                                          listen: false)
+                                      .deleteUserData(postId, 'post')
+                                      .whenComplete(() {
+                                    Navigator.pop(context);
+                                  });
+                                }),
+                          ],
+                        );
+                      });
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Future addLike(BuildContext context, String postId, String subDocId) async {
@@ -176,10 +162,10 @@ class PostFunctions with ChangeNotifier {
               height: MediaQuery.of(context).size.height * 0.55,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: constantcolors.blueColor,
+                  color: constantcolors.whiteColor,
                   borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12.0),
-                      topRight: Radius.circular(12.0))),
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0))),
               child: Column(
                 children: [
                   Padding(
@@ -221,17 +207,19 @@ class PostFunctions with ChangeNotifier {
                                     .map((DocumentSnapshot documentSnapshot) {
                               return Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.25,
+                                    MediaQuery.of(context).size.height * 0.1,
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8.0, left: 8.0),
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
                                           child: GestureDetector(
                                             onTap: () {
                                               if (documentSnapshot['useruid'] !=
@@ -254,101 +242,92 @@ class PostFunctions with ChangeNotifier {
                                             child: CircleAvatar(
                                                 backgroundColor:
                                                     constantcolors.transparent,
-                                                radius: 15.00,
+                                                radius: 20.00,
                                                 backgroundImage: NetworkImage(
                                                     documentSnapshot[
                                                         'userimage'])),
                                           ),
                                         ),
-                                        Column(
-                                          children: [
-                                            Container(
-                                              child: Row(
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                color:
+                                                    constantcolors.greyColor),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    documentSnapshot[
-                                                        'username'],
-                                                    style: TextStyle(
-                                                        color: constantcolors
-                                                            .blackColor,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 14.0),
-                                                  )
+                                                  Container(
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            documentSnapshot[
+                                                                'username'],
+                                                            style: TextStyle(
+                                                                color: constantcolors
+                                                                    .blackColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14.0),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            80,
+                                                    child: Row(children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                left: 20.0),
+                                                        child: Container(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width -
+                                                              100,
+                                                          child: Text(
+                                                            documentSnapshot[
+                                                                'comment'],
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .grey[700],
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 14.0),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ]),
+                                                  ),
                                                 ],
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                        Container(
-                                          child: Row(
-                                            children: [
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    FontAwesomeIcons.arrowUp,
-                                                    color: constantcolors
-                                                        .blackColor,
-                                                    size: 12,
-                                                  )),
-                                              Text('0',
-                                                  style: TextStyle(
-                                                      color: constantcolors
-                                                          .whiteColor,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 12.0)),
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    FontAwesomeIcons.reply,
-                                                    color: constantcolors
-                                                        .blackColor,
-                                                    size: 12,
-                                                  )),
-                                              IconButton(
-                                                  onPressed: () {},
-                                                  icon: Icon(
-                                                    FontAwesomeIcons.trashAlt,
-                                                    size: 12,
-                                                    color: constantcolors
-                                                        .blackColor,
-                                                  )),
-                                            ],
+                                            ),
                                           ),
-                                        )
+                                        ),
                                       ],
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Row(children: [
-                                        IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              FontAwesomeIcons
-                                                  .arrowRotateForward,
-                                              color: constantcolors.blackColor,
-                                              size: 12.0,
-                                            )),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.8,
-                                          child: Text(
-                                            documentSnapshot['comment'],
-                                            style: TextStyle(
-                                                color:
-                                                    constantcolors.blackColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 14.0),
-                                          ),
-                                        )
-                                      ]),
-                                    ),
-                                    Divider(
-                                      color: constantcolors.blackColor,
-                                    )
                                   ],
                                 ),
                               );
@@ -362,23 +341,29 @@ class PostFunctions with ChangeNotifier {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: constantcolors.greyColor),
                               width: 300.00,
-                              height: 20.00,
-                              child: TextField(
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                decoration: InputDecoration(
-                                  hintText: 'Add Comment...',
-                                  hintStyle: TextStyle(
+                              height: 50.00,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: TextField(
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  decoration: InputDecoration(
+                                    hintText: 'Add Comment...',
+                                    hintStyle: TextStyle(
+                                        color: constantcolors.blackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0),
+                                  ),
+                                  controller: commentcontroller,
+                                  style: TextStyle(
                                       color: constantcolors.blackColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16.0),
                                 ),
-                                controller: commentcontroller,
-                                style: TextStyle(
-                                    color: constantcolors.blackColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16.0),
                               )),
                           FloatingActionButton(
                               backgroundColor: constantcolors.blueColor,
@@ -416,10 +401,10 @@ class PostFunctions with ChangeNotifier {
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: constantcolors.blueColor,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12.0),
-                    topRight: Radius.circular(12.0))),
+                color: constantcolors.whiteColor,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0))),
             child: Column(children: [
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 150.00),
@@ -458,6 +443,8 @@ class PostFunctions with ChangeNotifier {
                         return ListTile(
                           leading: GestureDetector(
                             child: CircleAvatar(
+                                backgroundColor: constantcolors.transparent,
+                                radius: 20.00,
                                 backgroundImage: NetworkImage(
                                     DocumentSnapshot['userimage'])),
                           ),
