@@ -23,9 +23,7 @@ class FeedHelpers with ChangeNotifier {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: constantcolors.greyColor,
-        ),
+        decoration: BoxDecoration(),
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('posts')
@@ -60,11 +58,16 @@ class FeedHelpers with ChangeNotifier {
       return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+          padding: const EdgeInsets.only(
+              top: 8.0, bottom: 8.0, left: 4.0, right: 4.0),
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: constantcolors.whiteColor),
+              border: Border.all(
+                width: 0.5,
+                color: Colors.grey,
+              ),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,22 +104,19 @@ class FeedHelpers with ChangeNotifier {
                             borderRadius: BorderRadius.circular(140),
                             child: Container(
                               decoration: new BoxDecoration(
-                                  color: constantcolors.whiteColor,
                                   borderRadius: BorderRadius.circular(140)),
-                              height: 50,
-                              width: 50,
+                              height: 45,
+                              width: 45,
                               child: Stack(
                                 children: <Widget>[
                                   Container(
-                                    height: 50,
-                                    width: 50,
+                                    height: 45,
+                                    width: 45,
                                     margin: const EdgeInsets.only(
                                         left: 0.0, right: 0, top: 0, bottom: 0),
                                     padding: const EdgeInsets.all(0),
                                     decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: constantcolors.whiteColor,
-                                            width: 2),
+                                        border: Border.all(width: 2),
                                         borderRadius:
                                             BorderRadius.circular(140)),
                                     child: CircleAvatar(
@@ -142,15 +142,10 @@ class FeedHelpers with ChangeNotifier {
                             children: [
                               Spacer(),
                               Container(
-                                child: RichText(
-                                    text: TextSpan(
-                                  text: documentSnapshot['username'],
-                                  style: GoogleFonts.lato(
-                                      color: constantcolors.blackColor,
-                                      fontSize: 16,
-                                      letterSpacing: 1,
-                                      fontWeight: FontWeight.bold),
-                                )),
+                                child: Text(documentSnapshot['username'],
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold)),
                               ),
                               Container(
                                 child: RichText(
@@ -160,8 +155,7 @@ class FeedHelpers with ChangeNotifier {
                                         '${Provider.of<PostFunctions>(context, listen: false).imageTimePosted.toString()}',
                                     style: GoogleFonts.lato(
                                         color: Colors.grey,
-                                        fontSize: 15,
-                                        letterSpacing: 1,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.normal),
                                   )
                                 ])),
@@ -191,7 +185,6 @@ class FeedHelpers with ChangeNotifier {
                                 },
                                 icon: Icon(
                                   EvaIcons.moreVertical,
-                                  color: constantcolors.blackColor,
                                 ))
                             : Container(
                                 width: 0.0,
@@ -212,10 +205,7 @@ class FeedHelpers with ChangeNotifier {
                           child: Text(
                         documentSnapshot['caption'],
                         style: GoogleFonts.lato(
-                            color: constantcolors.blackColor,
-                            fontSize: 15,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.normal),
+                            fontSize: 15, fontWeight: FontWeight.normal),
                       )),
                     ),
                     const SizedBox(
@@ -225,15 +215,18 @@ class FeedHelpers with ChangeNotifier {
                         padding: const EdgeInsets.only(
                           top: 8.0,
                         ),
-                        child: Material(
-                          borderRadius: BorderRadius.circular(18.0),
-                          elevation: 2,
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(18.0),
-                              child: Image.network(
-                                documentSnapshot['postimage'],
-                                scale: 0.1,
-                              )),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(18.0),
+                            elevation: 2,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(18.0),
+                                child: Image.network(
+                                  documentSnapshot['postimage'],
+                                  scale: 0.1,
+                                )),
+                          ),
                         )),
                   ],
                 ),
@@ -251,10 +244,11 @@ class FeedHelpers with ChangeNotifier {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Provider.of<PostFunctions>(context,
-                                        listen: false)
-                                    .showLikes(context, documentSnapshot,
-                                        documentSnapshot['caption']);
+                                Provider.of<PostFunctions>(
+                                  context,
+                                  listen: false,
+                                ).showLikes(context, documentSnapshot,
+                                    documentSnapshot['caption']);
                               },
                               child: Icon(
                                 Icons.favorite,
@@ -280,7 +274,6 @@ class FeedHelpers with ChangeNotifier {
                                       child: Text(
                                         snapshot.data!.docs.length.toString(),
                                         style: TextStyle(
-                                          color: Colors.grey[700],
                                           fontSize: 14.0,
                                         ),
                                       ),
@@ -314,7 +307,6 @@ class FeedHelpers with ChangeNotifier {
                                       child: Text(
                                         snapshot.data!.docs.length.toString(),
                                         style: TextStyle(
-                                          color: Colors.grey[700],
                                           fontSize: 14.0,
                                         ),
                                       ),
@@ -333,7 +325,6 @@ class FeedHelpers with ChangeNotifier {
                               child: Text(
                                 ' Comments',
                                 style: TextStyle(
-                                  color: Colors.grey[700],
                                   fontSize: 14.0,
                                 ),
                               ),
@@ -380,13 +371,11 @@ class FeedHelpers with ChangeNotifier {
                                 children: [
                                   Icon(
                                     Icons.favorite_border,
-                                    color: Colors.grey[700],
                                     size: 22.00,
                                   ),
                                   Text(
                                     ' Like',
                                     style: TextStyle(
-                                      color: Colors.grey[700],
                                       fontSize: 14.0,
                                     ),
                                   ),
@@ -415,13 +404,11 @@ class FeedHelpers with ChangeNotifier {
                                 children: [
                                   Icon(
                                     Icons.mode_comment_outlined,
-                                    color: Colors.grey[700],
                                     size: 22.00,
                                   ),
                                   Text(
                                     ' Comment',
                                     style: TextStyle(
-                                      color: Colors.grey[700],
                                       fontSize: 14.0,
                                     ),
                                   ),

@@ -53,7 +53,6 @@ class _LoginPageState extends State<SingUpPage> {
                 width: 325,
                 height: 470,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Column(
@@ -67,7 +66,6 @@ class _LoginPageState extends State<SingUpPage> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: constantcolors.darkpurple,
                       ),
                     ),
                     const SizedBox(
@@ -91,7 +89,6 @@ class _LoginPageState extends State<SingUpPage> {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 FontAwesomeIcons.user,
-                                color: constantcolors.blackColor,
                                 size: 20,
                               ),
                               labelText: 'Your Name',
@@ -110,7 +107,6 @@ class _LoginPageState extends State<SingUpPage> {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 FontAwesomeIcons.envelope,
-                                color: constantcolors.blackColor,
                                 size: 20,
                               ),
                               labelText: 'Email Address',
@@ -129,7 +125,6 @@ class _LoginPageState extends State<SingUpPage> {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 FontAwesomeIcons.eyeSlash,
-                                color: constantcolors.blackColor,
                                 size: 20,
                               ),
                               labelText: 'Password',
@@ -172,9 +167,7 @@ class _LoginPageState extends State<SingUpPage> {
                           child: Text(
                             'SignUp',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

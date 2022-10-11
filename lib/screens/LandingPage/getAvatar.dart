@@ -45,7 +45,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                 width: 325,
                 height: 470,
                 decoration: BoxDecoration(
-                  color: constantcolors.whiteColor,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Column(
@@ -59,7 +58,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: constantcolors.darkpurple,
                       ),
                     ),
                     const SizedBox(
@@ -113,7 +111,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                                 child: Text(
                                   'Reselect',
                                   style: TextStyle(
-                                      color: constantcolors.whiteColor,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -150,7 +147,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                                 child: Text(
                                   'Done',
                                   style: TextStyle(
-                                      color: constantcolors.whiteColor,
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -209,7 +205,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: constantcolors.darkpurple,
                         ),
                       ),
                       const SizedBox(
@@ -238,7 +233,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                       Text(
                         getusername,
                         style: TextStyle(
-                          color: constantcolors.blackColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -249,7 +243,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                       Text(
                         getuseremail,
                         style: TextStyle(
-                          color: constantcolors.blackColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),
@@ -311,7 +304,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                                   child: Text(
                                     'Get Started',
                                     style: TextStyle(
-                                        color: constantcolors.whiteColor,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),

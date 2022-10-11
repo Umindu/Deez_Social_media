@@ -45,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
                 width: 325,
                 height: 470,
                 decoration: BoxDecoration(
-                  color: constantcolors.whiteColor,
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Column(
@@ -59,7 +58,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: constantcolors.darkpurple,
                       ),
                     ),
                     const SizedBox(
@@ -83,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 FontAwesomeIcons.envelope,
-                                color: constantcolors.blackColor,
                                 size: 20,
                               ),
                               labelText: 'Email Address',
@@ -102,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                               suffix: Icon(
                                 FontAwesomeIcons.eyeSlash,
-                                color: constantcolors.blackColor,
                                 size: 20,
                               ),
                               labelText: 'Password',
@@ -157,9 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             'Login',
                             style: TextStyle(
-                                color: constantcolors.whiteColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

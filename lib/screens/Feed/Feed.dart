@@ -18,13 +18,11 @@ class Feed extends StatelessWidget {
       appBar: AppBar(
         bottom: PreferredSize(
             child: Container(
-              color: Colors.grey,
               height: 2.0,
             ),
             preferredSize: Size.fromHeight(6.0)),
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: constantcolors.whiteColor,
         actions: [
           IconButton(
               onPressed: () {
@@ -33,19 +31,12 @@ class Feed extends StatelessWidget {
               },
               icon: Icon(
                 Icons.camera_enhance_rounded,
-                color: constantcolors.blackColor,
               )),
-          // Switch(
-          //     value: _themeManager == ThemeMode.dark,
-          //     onChanged: (newValue) {
-          //    _themeManager.toggleTheme(newValue);
-          //     })
         ],
         title: RichText(
             text: TextSpan(
                 text: 'Medicine',
                 style: TextStyle(
-                  color: constantcolors.darkpurple,
                   fontWeight: FontWeight.bold,
                   fontSize: 30.00,
                 ),
@@ -53,7 +44,6 @@ class Feed extends StatelessWidget {
               TextSpan(
                 text: 'Finder',
                 style: TextStyle(
-                  color: constantcolors.darkColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.00,
                 ),
@@ -64,3 +54,18 @@ class Feed extends StatelessWidget {
     );
   }
 }
+//  child: TextField(
+//                                   minLines: 1,
+//                                   maxLines: 5,
+//                                   textCapitalization: TextCapitalization.words,
+//                                   controller: commentcontroller,
+//                                   style: const TextStyle(
+//                                       fontSize: 16.0,
+//                                       fontWeight: FontWeight.bold),
+//                                   decoration: const InputDecoration(
+//                                     hintText: 'Add Comment...',
+//                                     hintStyle: TextStyle(
+//                                         fontSize: 16.0,
+//                                         fontWeight: FontWeight.bold),
+//                                   ),
+//                                 ),

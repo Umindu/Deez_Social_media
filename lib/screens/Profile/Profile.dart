@@ -22,7 +22,6 @@ class Profile extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             EvaIcons.settings2Outline,
-            color: constantcolors.darkColor,
           ),
           onPressed: () {},
         ),
@@ -30,13 +29,11 @@ class Profile extends StatelessWidget {
         actions: [
           IconButton(
               icon: Icon(EvaIcons.logOutOutline),
-              color: constantcolors.darkColor,
               onPressed: () {
                 Provider.of<ProfileHelper>(context, listen: false)
                     .logOutDialog(context);
               })
         ],
-        backgroundColor: constantcolors.whiteColor,
         title: RichText(
             text: TextSpan(
                 text: 'My',
@@ -58,9 +55,9 @@ class Profile extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height * 1.2,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: constantcolors.greyColor),
+          decoration: BoxDecoration(),
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('users')

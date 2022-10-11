@@ -33,7 +33,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: constantcolors.greyColor,
         body: PageView(
           controller: homePageController,
           physics: NeverScrollableScrollPhysics(),

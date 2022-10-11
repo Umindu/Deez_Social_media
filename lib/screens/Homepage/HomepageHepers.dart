@@ -15,16 +15,11 @@ class HomepageHelpers with ChangeNotifier {
   Widget bottomNavBar(
       BuildContext context, int index, PageController pageController) {
     return Container(
-        color: constantcolors.whiteColor,
         child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: GNav(
-                backgroundColor: constantcolors.whiteColor,
-                color: Colors.grey[800],
-                activeColor: constantcolors.darkpurple,
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-                tabActiveBorder:
-                    Border.all(color: constantcolors.darkpurple, width: 1),
+                tabActiveBorder: Border.all(width: 1),
                 gap: 8,
                 onTabChange: (val) {
                   index = val;

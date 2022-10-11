@@ -16,7 +16,7 @@ import 'package:m_finder/utils/UploadPost.dart';
 import 'package:provider/provider.dart';
 
 ThemeManager _themeManager = ThemeManager();
-
+get themeManager => _themeManager;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -26,6 +26,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Constantcolors constantcolors = Constantcolors();
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.system,
 
           // ThemeData(
           //   fontFamily: 'Poppins',

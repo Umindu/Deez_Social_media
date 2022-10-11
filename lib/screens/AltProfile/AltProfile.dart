@@ -25,7 +25,6 @@ class AltProfile extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: constantcolors.blackColor,
           ),
           onPressed: () {
             Navigator.pushReplacement(
@@ -35,12 +34,8 @@ class AltProfile extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(
-              icon: Icon(EvaIcons.moreVertical),
-              color: constantcolors.blackColor,
-              onPressed: () {})
+          IconButton(icon: Icon(EvaIcons.moreVertical), onPressed: () {})
         ],
-        backgroundColor: constantcolors.whiteColor,
         title: RichText(
             text: TextSpan(
                 text: 'Other',
@@ -64,7 +59,7 @@ class AltProfile extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height * 1.25,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: constantcolors.greyColor),
+          decoration: BoxDecoration(),
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('users')
