@@ -32,7 +32,7 @@ class _SplashscreenState extends State<Splashscreen> {
     setState(() {
       finalUid = userUid;
     });
-    print('############# $finalUid');
+    print('$finalUid');
   }
 
   @override
@@ -78,7 +78,7 @@ class _SplashscreenState extends State<Splashscreen> {
             children: <Widget>[
               RichText(
                 text: TextSpan(
-                    text: 'Medicine',
+                    text: 'D',
                     style: TextStyle(
                         fontFamily: 'Poppins',
                         color: constantcolors.whiteColor,
@@ -86,12 +86,12 @@ class _SplashscreenState extends State<Splashscreen> {
                         fontSize: 34.00),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Finder',
+                        text: 'eez',
                         style: TextStyle(
                             fontFamily: 'Poppins',
                             color: constantcolors.blackColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 34.00),
+                            fontSize: 28.00),
                       )
                     ]),
               )

@@ -5,9 +5,11 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
+import 'package:m_finder/screens/AltProfile/AltProfile.dart';
 import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:m_finder/services/FirebaseOperation.dart';
+import 'package:page_transition/page_transition.dart';
 import 'dart:core';
 
 import 'package:provider/provider.dart';
@@ -74,7 +76,7 @@ class AltProfileHelper with ChangeNotifier {
                               ),
                             ),
                             Container(
-                              height: 200.00,
+                              height: 230.00,
                               width: 180.00,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -101,6 +103,7 @@ class AltProfileHelper with ChangeNotifier {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20.0,
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                   Padding(
@@ -170,7 +173,6 @@ class AltProfileHelper with ChangeNotifier {
           Container(
             height: MediaQuery.of(context).size.height * 0.06,
             width: MediaQuery.of(context).size.width,
-            color: constantcolors.whiteColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -216,10 +218,12 @@ class AltProfileHelper with ChangeNotifier {
                                 'username': snapshot.data.data()['username'],
                                 'userimage': snapshot.data.data()['userimage'],
                                 'useremail': snapshot.data.data()['useremail'],
-                                'useruid': snapshot.data.data()['useruid'],
+                                'useruid': (userUid),
                                 'time': Timestamp.now()
                               })
-                          .whenComplete(() {});
+                          .whenComplete(() {
+                        print('$userUid');
+                      });
                     },
                     child: Text(
                       'Follow',
@@ -247,7 +251,7 @@ class AltProfileHelper with ChangeNotifier {
   }
 
   Widget divider() {
-    return Center(
+    return const Center(
       child: SizedBox(
         child: Divider(
           color: Colors.grey,
@@ -307,12 +311,45 @@ class AltProfileHelper with ChangeNotifier {
                             return Center(child: CircularProgressIndicator());
                           } else {
                             return Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: CircleAvatar(
-                                backgroundColor: constantcolors.transparent,
-                                radius: 22.0,
-                                backgroundImage:
-                                    NetworkImage(documentSnapshot['userimage']),
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      PageTransition(
+                                          child: AltProfile(
+                                            userUid:
+                                                documentSnapshot['useruid'],
+                                          ),
+                                          type:
+                                              PageTransitionType.bottomToTop));
+
+                                  print(documentSnapshot['useruid']);
+                                },
+                                child: Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            constantcolors.transparent,
+                                        radius: 25.0,
+                                        backgroundImage: NetworkImage(
+                                          documentSnapshot['userimage'],
+                                        ),
+                                      ),
+                                      Text(
+                                        documentSnapshot['username'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.0,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             );
                           }

@@ -37,14 +37,6 @@ class _LoginPageState extends State<SingUpPage> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                constantcolors.darkpurple,
-                constantcolors.purple,
-              ])),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +44,7 @@ class _LoginPageState extends State<SingUpPage> {
               Container(
                 width: 325,
                 height: 470,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
                 child: Column(
@@ -133,7 +125,7 @@ class _LoginPageState extends State<SingUpPage> {
                                       BorderRadius.all(Radius.circular(8))))),
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 40,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -173,7 +165,7 @@ class _LoginPageState extends State<SingUpPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 20,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -184,12 +176,14 @@ class _LoginPageState extends State<SingUpPage> {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'Back to Login ? ',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          Text(
+                          const Text(
                             'Login',
                             style: TextStyle(
                                 color: Colors.blue,

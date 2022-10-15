@@ -9,6 +9,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m_finder/constants/Constantcolors.dart';
 import 'package:m_finder/screens/AltProfile/AltProfile.dart';
+import 'package:m_finder/screens/AltProfile/AltProfileHelper.dart';
 import 'package:m_finder/screens/Splashscreen/splashScreen.dart';
 import 'package:m_finder/services/Authentication.dart';
 import 'package:m_finder/services/FirebaseOperation.dart';
@@ -371,7 +372,7 @@ class PostFunctions with ChangeNotifier {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               width: 300.00,
-                              height: 50.00,
+                              height: 60.00,
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
 
@@ -414,7 +415,6 @@ class PostFunctions with ChangeNotifier {
                                       commentcontroller.text)
                                   .whenComplete(() {
                                 commentcontroller.clear();
-                                FocusManager.instance.primaryFocus?.unfocus();
                                 notifyListeners();
                               });
                             },
@@ -437,10 +437,11 @@ class PostFunctions with ChangeNotifier {
     String postId,
   ) {
     return showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: (context) {
           return Container(
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -461,13 +462,14 @@ class PostFunctions with ChangeNotifier {
                 )),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.7,
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('posts')
                       .doc(postId)
                       .collection('likes')
+                      .orderBy("time")
                       .snapshots(),
                   builder: ((context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -479,6 +481,22 @@ class PostFunctions with ChangeNotifier {
                           children: snapshot.data!.docs.map((DocumentSnapshot) {
                         return ListTile(
                           leading: GestureDetector(
+                            onTap: () {
+                              if (DocumentSnapshot['useruid'] !=
+                                  (finalUid == ''
+                                      ? Provider.of<Authentication>(context,
+                                              listen: false)
+                                          .getuserUid
+                                      : finalUid)) {
+                                Navigator.pushReplacement(
+                                    context,
+                                    PageTransition(
+                                        child: AltProfile(
+                                          userUid: DocumentSnapshot['useruid'],
+                                        ),
+                                        type: PageTransitionType.bottomToTop));
+                              }
+                            },
                             child: CircleAvatar(
                                 backgroundColor: constantcolors.transparent,
                                 radius: 20.00,
@@ -495,23 +513,6 @@ class PostFunctions with ChangeNotifier {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 12.0),
                           ),
-                          trailing: (finalUid == ''
-                                      ? Provider.of<Authentication>(context,
-                                              listen: false)
-                                          .getuserUid
-                                      : finalUid) ==
-                                  DocumentSnapshot['useruid']
-                              ? Container(
-                                  height: 0.0,
-                                  width: 0.0,
-                                )
-                              : MaterialButton(
-                                  onPressed: (() {}),
-                                  child: Text('Follow',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14.0)),
-                                ),
                         );
                       }).toList());
                     }

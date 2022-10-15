@@ -149,6 +149,7 @@ class ProfileHelper with ChangeNotifier {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20.0,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           Padding(
@@ -297,27 +298,54 @@ class ProfileHelper with ChangeNotifier {
                                   return Center(
                                       child: CircularProgressIndicator());
                                 } else {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            constantcolors.transparent,
-                                        radius: 25.0,
-                                        backgroundImage: NetworkImage(
-                                          documentSnapshot['userimage'],
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (documentSnapshot['useruid'] !=
+                                            (finalUid == ''
+                                                ? Provider.of<Authentication>(
+                                                        context,
+                                                        listen: false)
+                                                    .getuserUid
+                                                : finalUid)) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              PageTransition(
+                                                  child: AltProfile(
+                                                    userUid: documentSnapshot[
+                                                        'useruid'],
+                                                  ),
+                                                  type: PageTransitionType
+                                                      .bottomToTop));
+                                        }
+                                      },
+                                      child: Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  constantcolors.transparent,
+                                              radius: 25.0,
+                                              backgroundImage: NetworkImage(
+                                                documentSnapshot['userimage'],
+                                              ),
+                                            ),
+                                            Text(
+                                              documentSnapshot['username'],
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        documentSnapshot['username'],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12.0,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   );
                                 }
                               }).toList());
@@ -439,7 +467,7 @@ class ProfileHelper with ChangeNotifier {
                     final SharedPreferences sharedPreferences =
                         await SharedPreferences.getInstance();
                     sharedPreferences.clear().whenComplete(() {
-                      print('########## All clear');
+                      print(' All clear');
                       Provider.of<Authentication>(context, listen: false)
                           .logOutViaEmail()
                           .whenComplete(() {
@@ -487,7 +515,22 @@ class ProfileHelper with ChangeNotifier {
                         return const Center(child: CircularProgressIndicator());
                       } else {
                         return ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            if (documentSnapshot['useruid'] !=
+                                (finalUid == ''
+                                    ? Provider.of<Authentication>(context,
+                                            listen: false)
+                                        .getuserUid
+                                    : finalUid)) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      child: AltProfile(
+                                        userUid: documentSnapshot['useruid'],
+                                      ),
+                                      type: PageTransitionType.bottomToTop));
+                            }
+                          },
                           leading: CircleAvatar(
                               backgroundImage:
                                   NetworkImage(documentSnapshot['userimage'])),
@@ -501,23 +544,6 @@ class ProfileHelper with ChangeNotifier {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 12.0),
                           ),
-                          trailing: (finalUid == ''
-                                      ? Provider.of<Authentication>(context,
-                                              listen: false)
-                                          .getuserUid
-                                      : finalUid) ==
-                                  documentSnapshot['useruid']
-                              ? Container(
-                                  height: 0.0,
-                                  width: 0.0,
-                                )
-                              : MaterialButton(
-                                  onPressed: (() {}),
-                                  child: Text('Follow',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14.0)),
-                                ),
                         );
                       }
                     }).toList());

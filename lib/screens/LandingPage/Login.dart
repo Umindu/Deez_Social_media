@@ -29,14 +29,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                constantcolors.darkpurple,
-                constantcolors.purple,
-              ])),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,9 +76,10 @@ class _LoginPageState extends State<LoginPage> {
                                 size: 20,
                               ),
                               labelText: 'Email Address',
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8))))),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              )))),
                     ),
                     const SizedBox(
                       height: 12,
@@ -102,9 +95,10 @@ class _LoginPageState extends State<LoginPage> {
                                 size: 20,
                               ),
                               labelText: 'Password',
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8))))),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ))),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 0, 30, 0),
@@ -170,10 +164,12 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'Not a member? ',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             'Register Now',

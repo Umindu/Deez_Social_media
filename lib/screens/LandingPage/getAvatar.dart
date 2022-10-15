@@ -29,14 +29,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                constantcolors.darkpurple,
-                constantcolors.purple,
-              ])),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,16 +88,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                             child: Container(
                               alignment: Alignment.center,
                               width: 110,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50)),
-                                  gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        constantcolors.darkpurple,
-                                        constantcolors.purple
-                                      ])),
                               child: Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: Text(
@@ -177,14 +159,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
           return Container(
             height: MediaQuery.of(context).size.height * 5,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  constantcolors.darkpurple,
-                  constantcolors.purple,
-                ])),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -193,7 +167,6 @@ class _getAvatarPageState extends State<getAvatarPage> {
                   width: 325,
                   height: 470,
                   decoration: BoxDecoration(
-                    color: constantcolors.whiteColor,
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   child: Column(
@@ -213,7 +186,7 @@ class _getAvatarPageState extends State<getAvatarPage> {
                       Text(
                         "Please Select to Your Profile Pic",
                         style: TextStyle(
-                          color: constantcolors.blackColor,
+                          color: Colors.grey,
                           fontSize: 15,
                         ),
                       ),

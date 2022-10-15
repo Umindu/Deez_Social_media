@@ -247,12 +247,15 @@ class FeedHelpers with ChangeNotifier {
                                 Provider.of<PostFunctions>(
                                   context,
                                   listen: false,
-                                ).showLikes(context, documentSnapshot,
-                                    documentSnapshot['caption']);
+                                ).showLikes(
+                                  context,
+                                  documentSnapshot,
+                                  documentSnapshot['caption'],
+                                );
                               },
                               child: Icon(
                                 Icons.favorite,
-                                color: constantcolors.darkpurple,
+                                color: constantcolors.redColor,
                                 size: 22.00,
                               ),
                             ),

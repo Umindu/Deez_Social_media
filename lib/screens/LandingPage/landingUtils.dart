@@ -35,28 +35,23 @@ class LandingUtils with ChangeNotifier {
           return Container(
             height: MediaQuery.of(context).size.height * 0.1,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: constantcolors.blueGreyColor,
-                borderRadius: BorderRadius.circular(12.0)),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
             child: Column(
               children: [
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 150.00),
                     child: Divider(
                       thickness: 4.00,
-                      color: constantcolors.whiteColor,
                     )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     MaterialButton(
-                        color: constantcolors.blueColor,
                         child: Text(
                           'Gallery',
                           style: TextStyle(
-                              color: constantcolors.whiteColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
                         ),
                         onPressed: () {
                           pickUserAvatar(context, ImageSource.gallery)
@@ -69,13 +64,10 @@ class LandingUtils with ChangeNotifier {
                           });
                         }),
                     MaterialButton(
-                        color: constantcolors.blueColor,
                         child: Text(
                           'Camera',
                           style: TextStyle(
-                              color: constantcolors.whiteColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0),
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
                         ),
                         onPressed: () {
                           pickUserAvatar(context, ImageSource.camera)

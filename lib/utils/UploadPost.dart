@@ -139,8 +139,8 @@ class UploadPost with ChangeNotifier {
                           child: Text(
                             'Reselect',
                             style: TextStyle(
+                              fontSize: 16.00,
                               fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
                             ),
                           ),
                           onPressed: () {
@@ -150,6 +150,7 @@ class UploadPost with ChangeNotifier {
                           child: Text(
                             'Confirm Image',
                             style: TextStyle(
+                              fontSize: 16.00,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -303,6 +304,8 @@ class UploadPost with ChangeNotifier {
                             .initUserEmail,
                       });
                     }).whenComplete(() async {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                       Navigator.pop(context);
                     });
                   },

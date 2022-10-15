@@ -35,17 +35,19 @@ class Feed extends StatelessWidget {
         ],
         title: RichText(
             text: TextSpan(
-                text: 'Medicine',
+                text: 'D',
                 style: TextStyle(
+                  color: constantcolors.purple,
                   fontWeight: FontWeight.bold,
                   fontSize: 30.00,
                 ),
                 children: <TextSpan>[
               TextSpan(
-                text: 'Finder',
+                text: 'eez',
                 style: TextStyle(
+                  color: constantcolors.darkColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20.00,
+                  fontSize: 25.00,
                 ),
               )
             ])),
